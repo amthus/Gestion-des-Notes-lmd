@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use app\Http\Controllers\ECController;
-use app\Http\Controllers\UEController   ;
+use App\Http\Controllers\ECController;
+use App\Http\Controllers\UEController   ;
 
 Route::get('/', function () {
     return view('welcome');

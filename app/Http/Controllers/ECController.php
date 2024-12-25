@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\EC;
-use app\Models\UE;
+use App\Models\EC;
+use App\Models\UE;
 
 class ECController extends Controller
 {
