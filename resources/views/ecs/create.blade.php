@@ -19,11 +19,6 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="credits_ects" class="block text-sm font-medium text-gray-700">Crédits ECTS</label>
-                            <input type="number" name="credits_ects" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="credits_ects" required>
-                        </div>
-
-                        <div class="mb-4">
                             <label for="ue_id" class="block text-sm font-medium text-gray-700">UE Associée</label>
                             <select name="ue_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="ue_id" required>
                                 @foreach($ues as $ue)

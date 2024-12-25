@@ -3,37 +3,55 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <h2 class="text-2xl font-bold mb-4">Éléments Constitutifs (EC)</h2>
-                    <table class="min-w-full">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Nom</th>
-                                <th>Crédits ECTS</th>
-                                <th>UE Associée</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($ecs as $ec)
-                                <tr>
-                                    <td>{{ $ec->code }}</td>
-                                    <td>{{ $ec->nom }}</td>
-                                    <td>{{ $ec->credits_ects }}</td>
-                                    <td>{{ $ec->ue ? $ec->ue->nom : 'Non associé' }}</td>
-                                    <td>
-                                        <a href="{{ route('ecs.edit', $ec->id) }}" class="text-yellow-600 hover:text-yellow-800">Modifier</a>
-                                        <form action="{{ route('ecs.destroy', $ec->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 ml-4">Supprimer</button>
-                                        </form>
-                                    </td>
+                    <div class="flex justify-between items-center mb-6">
+                        <!-- Titre -->
+                        <h2 class="text-2xl font-bold text-gray-800">Éléments Constitutifs (EC)</h2>
+
+                        <!-- Bouton Créer un EC -->
+                        <a href="{{ route('ecs.create') }}" 
+                           class="bg-blue-600 text-white py-2 px-4 rounded-lg text-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Créer un nouvel EC
+                        </a>
+                    </div>
+
+                    <div class="overflow-x-auto shadow rounded-lg">
+                        <table class="min-w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-600 border-b">
+                                    <th class="py-3 px-6">Code</th>
+                                    <th class="py-3 px-6">Nom</th>
+                                    <th class="py-3 px-6">UE Associée</th>
+                                    <th class="py-3 px-6">Actions</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <a href="{{ route('ecs.create') }}" class="mt-4 inline-block bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Créer un nouvel EC</a>
+                            </thead>
+                            <tbody>
+                                @foreach($ecs as $ec)
+                                    <tr class="hover:bg-gray-50 border-b">
+                                        <td class="py-4 px-6">{{ $ec->code }}</td>
+                                        <td class="py-4 px-6">{{ $ec->nom }}</td>
+                                        <td class="py-4 px-6">{{ $ec->ue ? $ec->ue->nom : 'Non associé' }}</td>
+                                        <td class="py-4 px-6 flex items-center space-x-2">
+                                            <!-- Modifier -->
+                                            <a href="{{ route('ecs.edit', $ec->id) }}" 
+                                               class="bg-yellow-500 text-white px-4 py-2 rounded-md text-xs font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                                Modifier
+                                            </a>
+
+                                            <!-- Supprimer -->
+                                            <form action="{{ route('ecs.destroy', $ec->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élément constitutif ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="bg-red-500 text-white px-4 py-2 rounded-md text-xs font-medium hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                                    Supprimer
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

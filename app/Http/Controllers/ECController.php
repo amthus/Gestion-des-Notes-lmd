@@ -28,8 +28,8 @@ class ECController extends Controller
         $request->validate([
             'code' => 'required|unique:elements_constitutifs',
             'nom' => 'required',
-            'credits_ects' => 'required|integer',
-            'ue_id' => 'required|exists:unites_enseignement,id', // Si l'EC est lié à une UE
+            'ue_id' => 'required|exists:unites_enseignement,id',
+            'coefficient' => 'required|integer',
         ]);
 
         EC::create($request->all());
@@ -55,8 +55,8 @@ class ECController extends Controller
         $request->validate([
             'code' => 'required|unique:elements_constitutifs,code,' . $ec->id,
             'nom' => 'required',
-            'credits_ects' => 'required|integer',
             'ue_id' => 'required|exists:unites_enseignement,id',
+            'coefficient' => 'required|integer',
         ]);
 
         $ec->update($request->all());
