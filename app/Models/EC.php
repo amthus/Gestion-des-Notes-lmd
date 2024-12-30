@@ -17,4 +17,5 @@ class EC extends Model
     public function ue()
     {
         return $this->belongsTo(UE::class);
-    }}
+    }
+}
