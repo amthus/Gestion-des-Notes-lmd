@@ -18,4 +18,9 @@ class EC extends Model
     {
         return $this->belongsTo(UE::class);
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }
