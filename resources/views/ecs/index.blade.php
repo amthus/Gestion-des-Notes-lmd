@@ -20,6 +20,7 @@
                                 <tr class="bg-gray-100 text-left text-sm font-semibold text-gray-600 border-b">
                                     <th class="py-3 px-6">Code</th>
                                     <th class="py-3 px-6">Nom</th>
+                                    <th class="py-3 px-6">Coefficient</th>
                                     <th class="py-3 px-6">UE Associée</th>
                                     <th class="py-3 px-6">Actions</th>
                                 </tr>
@@ -29,6 +30,7 @@
                                     <tr class="hover:bg-gray-50 border-b">
                                         <td class="py-4 px-6">{{ $ec->code }}</td>
                                         <td class="py-4 px-6">{{ $ec->nom }}</td>
+                                        <td class="py-4 px-6">{{ $ec->coefficient }}</td>
                                         <td class="py-4 px-6">{{ $ec->ue ? $ec->ue->nom : 'Non associé' }}</td>
                                         <td class="py-4 px-6 flex items-center space-x-2">
                                             <!-- Modifier -->
