@@ -4,10 +4,19 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <!-- Titre -->
                         <h2 class="text-3xl font-extrabold text-gray-800">Unités d'Enseignement</h2>
 
-                        <!-- Bouton Créer une UE -->
+                        @if(session('success'))
+                            <div id="success-message" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4">
+                                {{ session('success') }}
+                            </div>
+                            <script>
+                                setTimeout(function() {
+                                    document.getElementById('success-message').style.display = 'none';
+                                }, 2000);
+                            </script>
+                         @endif
+
                         <a href="{{ route('ues.create') }}" 
                            class="bg-green-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                             Créer une UE
