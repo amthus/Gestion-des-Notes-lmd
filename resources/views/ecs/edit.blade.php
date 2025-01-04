@@ -20,8 +20,8 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="credits_ects" class="block text-sm font-medium text-gray-700">Crédits ECTS</label>
-                            <input type="number" name="credits_ects" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="credits_ects" value="{{ $ec->credits_ects }}" required>
+                            <label for="coefficient" class="block text-sm font-medium text-gray-700">Coefficient</label>
+                            <input type="number" name="coefficient" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="coefficient" required>
                         </div>
 
                         <div class="mb-4">
