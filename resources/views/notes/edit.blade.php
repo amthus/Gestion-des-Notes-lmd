@@ -41,6 +41,11 @@
                 </select>
             </div>
 
+            <div>
+                <label for="date_evaluation" class="block text-sm font-medium text-gray-700">Date_evaluation</label>
+                <input type="date" name="date_evaluation" id="date_evaluation" value="{{ $note->date_evaluation }}" class="mt-1 block w-full" min="0" max="20" step="0.25" required>
+            </div>
+
             <button type="submit" class="btn btn-warning mt-3 bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">
                 Enregistrer les modifications
             </button>

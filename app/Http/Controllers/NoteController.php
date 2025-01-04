@@ -9,6 +9,15 @@ use App\Models\Note;
 
 class NoteController extends Controller
 {
+
+    public function index()
+    {
+        $etudiants = Etudiant::all();
+        $notes = Note::with(['etudiant', 'ec'])->get();
+
+        return view('notes.index', compact('notes'));
+    }
+
     public function create()
     {
         $etudiants = Etudiant::all();
@@ -24,16 +33,19 @@ class NoteController extends Controller
         return view('notes.edit', compact('note', 'etudiants', 'ecs'));
     }
 
+
     public function update(Request $request, Note $note)
     {
-        $request->validate([
+        $validated = $request->validate([
             'etudiant_id' => 'required|exists:etudiants,id',
             'ec_id' => 'required|exists:elements_constitutifs,id',
             'note' => 'required|numeric|min:0|max:20',
             'session' => 'required|in:normale,rattrapage',
+            'date_evaluation' => 'required|date',
         ]);
 
-        $note->update($request->all());
+        $note->update();
+
         return redirect()->route('notes.index')->with('success', 'Note mise à jour avec succès.');
     }
 
@@ -53,25 +65,19 @@ class NoteController extends Controller
         return redirect()->route('notes.create')->with('success', 'Note ajoutée avec succès !');
     }
 
+
     public function destroy(Note $note)
     {
         $note->delete();
+
         return redirect()->route('notes.index')->with('success', 'Note supprimée avec succès.');
     }
 
 
-    public function index()
-    {
-        $notes = Note::with(['etudiant', 'ec'])->get(); // Charge les relations
-        return view('notes.index', compact('notes'));
-    }
-
     public function moyenneParUE($etudiant_id, $ue_id)
     {
-        // Récupère la moyenne pour un étudiant donné et une UE
         $moyenne = Note::moyenneParUE($etudiant_id, $ue_id);
 
         return view('notes.moyenne', compact('moyenne'));
     }
-
 }

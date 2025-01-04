@@ -2,10 +2,20 @@
     <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Ajouter une note</h1>
 
-        @if(session('success'))
-        <div class="bg-green-100 text-green-800 px-4 py-2 rounded mb-4">
-            {{ session('success') }}
+        @if ($errors->any())
+        <div id="error-message" class="bg-red-500 text-white px-4 py-2 rounded mb-2">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById('error-message').style.display = 'none';
+            }, 2000);
+        </script>
         @endif
 
         <form action="{{ route('notes.store') }}" method="POST" class="space-y-4">

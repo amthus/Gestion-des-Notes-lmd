@@ -40,20 +40,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ues/{ue}/edit', [UEController::class, 'edit'])->name('ues.edit');
     Route::put('/ues/{ue}', [UEController::class, 'update'])->name('ues.update');
     Route::delete('/ues/{ue}', [UEController::class, 'destroy'])->name('ues.destroy');
+
+    Route::get('/notes', action: [NoteController::class, 'index'])->name('notes.index');
+    Route::get('/notes/create', [NoteController::class, 'create'])->name('notes.create');
+    Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
+    Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
+    Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
+    Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
+
+    Route::get('/etudiants', [EtudiantController::class, 'index'])->name('etudiants.index');
+    Route::get('/etudiants/create', [EtudiantController::class, 'create'])->name('etudiants.create');
+    Route::post('/etudiants', [EtudiantController::class, 'store'])->name('etudiants.store');
+    Route::get('/etudiants/{etudiant}/edit', [EtudiantController::class, 'edit'])->name('etudiants.edit');
+    Route::put('/etudiants/{etudiant}', [EtudiantController::class, 'update'])->name('etudiants.update');
+    Route::delete('/etudiants/{etudiant}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy');
 });
-
-Route::resource('ues', UEController::class);
-Route::resource('ecs', ECController::class);
-
-Route::get('/notes/create', [NoteController::class, 'create'])->name('notes.create');
-Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
-Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
-Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit');
-Route::put('/notes/{note}', [NoteController::class, 'update'])->name('notes.update');
-Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
-
-Route::get('/etudiants/create', [EtudiantController::class, 'create'])->name('etudiants.create');
-Route::post('/etudiants', [EtudiantController::class, 'store'])->name('etudiants.store');
 
 Route::get('/notes/moyenne/{etudiant_id}/{ue_id}', [NoteController::class, 'moyenneParUE'])->name('notes.moyenne');
 

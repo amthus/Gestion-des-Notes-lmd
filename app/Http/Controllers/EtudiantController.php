@@ -7,27 +7,50 @@ use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
 {
-    // Méthode pour afficher le formulaire de création
+    public function index()
+    {
+        $etudiants = Etudiant::all();
+
+        return view('etudiants.index', compact('etudiants'));
+    }
     public function create()
     {
         return view('etudiants.create');
     }
 
-    // Méthode pour enregistrer un étudiant
     public function store(Request $request)
     {
-        // Valider les données du formulaire
         $validated = $request->validate([
-            'numero_etudiant' => 'required|unique:etudiants,numero_etudiant',
+            'numero_etudiant' => 'required|unique:etudiants|numeric',
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'niveau' => 'required|string|max:255',
         ]);
 
-        // Créer un étudiant dans la base de données
         Etudiant::create($validated);
 
-        // Retourner à la page de création avec un message de succès
-        return redirect()->route('etudiants.create')->with('success', 'Étudiant ajouté avec succès !');
+        return redirect()->route('etudiants.index')->with('success', 'Étudiant ajouté avec succès');
+    }
+
+    public function edit($id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+        return view('etudiants.edit', compact('etudiant'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+        $etudiant->update($request->all());
+
+        return redirect()->route('etudiants.index')->with('success', 'Étudiant mis à jour avec succès!');
+    }
+
+    public function destroy($id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+        $etudiant->delete();
+
+        return redirect()->route('etudiants.index')->with('success', 'Étudiant supprimé avec succès!');
     }
 }
