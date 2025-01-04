@@ -34,16 +34,10 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="coefficient" class="block text-sm font-medium text-gray-700">Coefficient</label>
-                            <input type="number" name="coefficient" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="coefficient" required>
-                        </div>
-
-
-                        <div class="mb-4">
                             <label for="ue_id" class="block text-sm font-medium text-gray-700">UE Associée</label>
                             <select name="ue_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" id="ue_id" required>
                                 @foreach($ues as $ue)
-                                    <option value="{{ $ue->id }}">{{ $ue->nom }}</option>
+                                <option value="{{ $ue->id }}">{{ $ue->nom }}</option>
                                 @endforeach
                             </select>
                         </div>
