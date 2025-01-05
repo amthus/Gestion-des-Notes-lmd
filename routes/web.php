@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/etudiants/{etudiant}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy');
 });
 
-Route::get('/notes/moyenne/{etudiant_id}/{ue_id}', [NoteController::class, 'moyenneParUE'])->name('notes.moyenne');
+//Route::get('/notes/moyenne/{etudiant_id}/{ue_id}', [NoteController::class, 'moyenneParUE'])->name('notes.moyenne');
+Route::get('/notes/moyenne/{etudiant_id}', [NoteController::class, 'afficherMoyennes'])->name('notes.moyenne');
 
 require __DIR__ . '/auth.php';

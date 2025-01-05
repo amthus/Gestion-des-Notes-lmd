@@ -62,7 +62,7 @@ class NoteController extends Controller
 
         Note::create($validated);
 
-        return redirect()->route('notes.create')->with('success', 'Note ajoutée avec succès !');
+        return redirect()->route('notes.index')->with('success', 'Note ajoutée avec succès !');
     }
 
 
@@ -79,5 +79,40 @@ class NoteController extends Controller
         $moyenne = Note::moyenneParUE($etudiant_id, $ue_id);
 
         return view('notes.moyenne', compact('moyenne'));
+    }
+
+    public function afficherMoyennes($etudiant_id)
+    {
+        // Récupérer les informations de l'étudiant
+        $etudiant = Etudiant::findOrFail($etudiant_id);
+
+        // Récupérer les notes de l'étudiant
+        $notes = Note::with('ec.ue')->where('etudiant_id', $etudiant_id)->get();
+
+        // Calcul des moyennes par UE
+        $moyennesParUE = [];
+        $totalNotes = 0;
+        $totalCoefficients = 0;
+
+        foreach ($notes->groupBy('ec.ue_id') as $ueId => $notesParUE) {
+            $ueNom = $notesParUE->first()->ec->ue->nom; // Récupérer le nom de l'UE
+            $sommeNotesUE = 0;
+            $sommeCoefficientsUE = 0;
+
+            foreach ($notesParUE as $note) {
+                $sommeNotesUE += $note->note * $note->ec->coefficient;
+                $sommeCoefficientsUE += $note->ec->coefficient;
+            }
+
+            $moyennesParUE[$ueNom] = $sommeCoefficientsUE > 0 ? $sommeNotesUE / $sommeCoefficientsUE : 0;
+
+            $totalNotes += $sommeNotesUE;
+            $totalCoefficients += $sommeCoefficientsUE;
+        }
+
+        // Calcul de la moyenne générale
+        $moyenneGenerale = $totalCoefficients > 0 ? $totalNotes / $totalCoefficients : 0;
+
+        return view('notes.moyenne', compact('moyennesParUE', 'moyenneGenerale', 'etudiant'));
     }
 }

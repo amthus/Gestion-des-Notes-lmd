@@ -65,7 +65,7 @@
                                     Gérez les informations des étudiants.
                                 </p>
                                 <a href="{{ route('etudiants.index') }}" 
-                                   class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                                   class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-purple-600">
                                     Accéder aux Étudiants
                                 </a>
                             </div>
