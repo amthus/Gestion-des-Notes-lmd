@@ -5,19 +5,19 @@
                 <div class="p-6">
                     <h1 class="text-2xl font-bold mb-4">Créer un nouvel élément constitutif (EC)</h1>
                     @if ($errors->any())
-                        <div id="error-message" class="bg-red-500 text-white px-4 py-2 rounded mb-2">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div id="error-message" class="bg-red-500 text-white px-4 py-2 rounded mb-2">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
 
-                        <script>
-                            setTimeout(function() {
-                                document.getElementById('error-message').style.display = 'none';
-                            }, 2000);
-                        </script>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById('error-message').style.display = 'none';
+                        }, 2000);
+                    </script>
                     @endif
 
                     <form action="{{ route('ecs.store') }}" method="POST">

@@ -42,12 +42,19 @@
                                     <td class="py-4 px-6 text-gray-800">{{ $etudiant->prenom }}</td>
                                     <td class="py-4 px-6 text-gray-800">{{ $etudiant->niveau }}</td>
                                     <td class="py-4 px-6 flex items-center space-x-2">
+                                        <!-- Bouton Voir la moyenne -->
+                                        <a href="{{ route('notes.moyenne', $etudiant->id) }}"
+                                            class="bg-yellow-500 text-white px-4 py-2 rounded-md text-xs font-medium hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">
+                                            Voir la moyenne
+                                        </a>
 
+                                        <!-- Bouton Modifier -->
                                         <a href="{{ route('etudiants.edit', $etudiant->id) }}"
                                             class="bg-blue-500 text-white px-4 py-2 rounded-md text-xs font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                                             Modifier
                                         </a>
 
+                                        <!-- Formulaire de suppression -->
                                         <form action="{{ route('etudiants.destroy', $etudiant->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">
                                             @csrf
                                             @method('DELETE')
